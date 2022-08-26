@@ -1,14 +1,17 @@
-import {useQuery} from '@tanstack/react-query';
-
 import './App.css';
+import Films from './Films';
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
+
+const queryClient = new QueryClient()
 
 function App() {
-  console.log(useQuery);
-  return (
-    <div className="App">
-
-    </div>
-  );
+    return (
+        <QueryClientProvider client={queryClient}>
+            <div className="App">
+                <Films/>
+            </div>
+        </QueryClientProvider>
+    );
 }
 
 export default App;
