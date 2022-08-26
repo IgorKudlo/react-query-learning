@@ -2,10 +2,11 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 
 const Films = () => {
-    const { data: {results = []} = {}, isLoading } = useQuery(
+    const { data: {results = []} = {}, isLoading, isError, error } = useQuery(
         ['key'],
         async () => {
             await new Promise(resolve => setTimeout(resolve, 1000));
+            throw new Error('Error test')
             return fetch('http://swapi.dev/api/films').then(res => res.json())
         }
     );
@@ -15,6 +16,8 @@ const Films = () => {
             {
                 isLoading
                 ? 'Loading ...'
+                : isError
+                ? error.message
                 : results.map(film => (
                     <div key={film.title}>{film.title}</div>
                 ))}
