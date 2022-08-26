@@ -6,9 +6,12 @@ const Films = () => {
         ['key'],
         async () => {
             await new Promise(resolve => setTimeout(resolve, 1000));
-            throw new Error('Error test')
             return fetch('http://swapi.dev/api/films').then(res => res.json())
+        },
+        {
+            refetchOnWindowFocus: false
         }
+
     );
 
     return (
