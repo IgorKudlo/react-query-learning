@@ -9,8 +9,7 @@ function App() {
     return (
         <QueryClientProvider client={queryClient}>
             <div className="App">
-                <Films queryKey={'film1'}/>
-                <Films queryKey={'film1'}/>
+                <Films queryKey={'film'}/>
             </div>
             <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
