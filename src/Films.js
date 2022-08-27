@@ -1,9 +1,9 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 
-const Films = () => {
+const Films = ({ queryKey }) => {
     const { data: {results = []} = {}, isLoading, isError, error, isFetching } = useQuery(
-        ['key'],
+        [queryKey],
         async () => {
             await new Promise(resolve => setTimeout(resolve, 1000));
             return fetch('http://swapi.dev/api/films').then(res => res.json())
