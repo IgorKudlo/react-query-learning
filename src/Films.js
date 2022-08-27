@@ -10,12 +10,38 @@ const useGetFilms = () => (
     )
 );
 
+const useGetPlanets = () => (
+    useQuery(
+        ['planets'],
+        () => {
+            return fetch('http://swapi.dev/api/planets').then(res => res.json());
+        }
+    )
+);
+
 const FilmsLength = () => {
     const { data: {results = []} = {}, isLoading } = useGetFilms();
     return (
         isLoading
         ? 'Loading...'
         : <p>Колличество фильмов: {results.length}</p>
+    )
+}
+
+const Planets = () => {
+    const { data: {results = []} = {}, isLoading, isError, error } = useGetPlanets();
+    return (
+        <div>
+            {
+                isLoading
+                ? 'Loading ...'
+                : isError
+                    ? error.message
+                    : results.map(planet => (
+                        <div key={planet.name}>{planet.name}</div>
+                ))
+            }
+        </div>
     )
 }
 
@@ -34,6 +60,7 @@ const Films = () => {
                 ))}
             <br />
             {isFetching ? 'Обновление ...' : null}
+            <Planets/>
         </div>
     );
 };
