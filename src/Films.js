@@ -7,12 +7,9 @@ const Films = () => {
         async () => {
             await new Promise(resolve => setTimeout(resolve, 1000));
             return fetch('http://swapi.dev/api/films').then(res => res.json())
-        },
-        {
-            refetchOnWindowFocus: false,
-            staleTime: 'infinity',
+        }, {
+            cacheTime: 600
         }
-
     );
 
     return (
